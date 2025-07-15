@@ -1,42 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Cookie&family=Poppins:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Biryani Bombs Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    /* Brand Color Palette */
+    --tandoori-red: 1 58% 57%;           /* #D9534F */
+    --kesar-gold: 43 82% 66%;            /* #F4C95D */
+    --cardamom-cream: 38 50% 96%;        /* #FAF5EF */
+    --mint-green: 84 35% 43%;            /* #6A994E */
+    --clay-brown: 22 38% 34%;            /* #7C4D3A */
+    
+    /* Semantic Design Tokens */
+    --background: var(--cardamom-cream);
+    --foreground: var(--clay-brown);
+    
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
+    --card-foreground: var(--clay-brown);
+    
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    --popover-foreground: var(--clay-brown);
+    
+    --primary: var(--tandoori-red);
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: var(--kesar-gold);
+    --secondary-foreground: var(--clay-brown);
+    
+    --muted: var(--cardamom-cream);
+    --muted-foreground: var(--clay-brown);
+    
+    --accent: var(--mint-green);
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: var(--tandoori-red);
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 38 30% 85%;
+    --input: 38 30% 85%;
+    --ring: var(--primary);
+    
+    --radius: 0.75rem;
+    
+    /* Premium Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary) / 0.9), hsl(var(--clay-brown) / 0.8));
+    --gradient-gold: linear-gradient(135deg, hsl(var(--kesar-gold)), hsl(var(--kesar-gold) / 0.7));
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--cardamom-cream)), hsl(var(--cardamom-cream) / 0.5));
+    
+    /* Premium Shadows */
+    --shadow-soft: 0 4px 20px hsl(var(--clay-brown) / 0.1);
+    --shadow-medium: 0 8px 32px hsl(var(--clay-brown) / 0.15);
+    --shadow-strong: 0 12px 48px hsl(var(--clay-brown) / 0.2);
+    --shadow-glow: 0 0 40px hsl(var(--kesar-gold) / 0.3);
+    
+    /* Typography Scale */
+    --font-heading: 'Cookie', cursive;
+    --font-body: 'Poppins', sans-serif;
+    
+    /* Smooth Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +127,89 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+    font-family: var(--font-body);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+@layer components {
+  /* Premium Button Variants */
+  .btn-hero {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg;
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:scale-105;
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .btn-accent {
+    @apply bg-accent text-accent-foreground hover:bg-accent/90 px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:scale-105;
+    box-shadow: var(--shadow-soft);
+  }
+  
+  /* Premium Card Styles */
+  .card-premium {
+    @apply bg-card rounded-2xl p-6 transition-all duration-300 hover:scale-105;
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .card-premium:hover {
+    box-shadow: var(--shadow-medium);
+  }
+  
+  /* Hero Text Styles */
+  .hero-title {
+    @apply text-6xl md:text-8xl font-bold mb-6 leading-tight;
+    font-family: var(--font-heading);
+    text-shadow: 2px 4px 8px hsl(var(--clay-brown) / 0.3);
+  }
+  
+  .hero-subtitle {
+    @apply text-xl md:text-2xl mb-8 leading-relaxed opacity-90;
+  }
+  
+  /* Section Headings */
+  .section-title {
+    @apply text-4xl md:text-6xl font-bold mb-8 text-center;
+    font-family: var(--font-heading);
+    color: hsl(var(--clay-brown));
+  }
+  
+  /* Smooth Animations */
+  .fade-in {
+    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+  }
+  
+  .fade-in.visible {
+    @apply opacity-100 translate-y-0;
+  }
+  
+  /* Floating Animation */
+  .float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  /* Gradient Backgrounds */
+  .bg-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .bg-gold {
+    background: var(--gradient-gold);
+  }
+  
+  .bg-subtle {
+    background: var(--gradient-subtle);
   }
 }
