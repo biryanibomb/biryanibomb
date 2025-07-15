@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import biryaniCube from "@/assets/biryani-cube-product.jpg";
 import biryaniScene from "@/assets/biryani-overhead-scene.jpg";
 import floatingSpices from "@/assets/floating-spices.png";
 
@@ -22,8 +21,8 @@ const Hero = () => {
         <div className="relative order-2 lg:order-1">
           <div className="relative">
             <img 
-              src={biryaniCube} 
-              alt="Biryani Bomb Cube Product" 
+              src="/lovable-uploads/61bcfaa1-3f30-42cd-ab18-ae7c93c8b909.png" 
+              alt="Biryani Bomb Hero Image" 
               className="w-full max-w-md mx-auto lg:max-w-lg drop-shadow-2xl transform hover:scale-105 transition-transform duration-500"
             />
             
