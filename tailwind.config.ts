@@ -20,7 +20,9 @@ export default {
 		extend: {
 			fontFamily: {
 				'heading': ['Cookie', 'cursive'],
-				'body': ['Poppins', 'sans-serif'],
+				'premium': ['Playfair Display', 'serif'],
+				'body': ['Inter', 'sans-serif'],
+				'body-alt': ['Poppins', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
