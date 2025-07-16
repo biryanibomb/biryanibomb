@@ -61,7 +61,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
       isScrolled 
         ? "bg-background/95 backdrop-blur-md shadow-lg" 
         : "bg-background/80 backdrop-blur-sm"
@@ -70,7 +70,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div 
-            className="text-2xl font-bold text-primary cursor-pointer hover:text-primary-glow transition-colors"
+            className="text-2xl font-bold text-primary cursor-pointer hover:text-primary-glow transition-colors flex-shrink-0"
             onClick={() => smoothScrollTo("hero")}
           >
             Biryani Bombs
@@ -97,40 +97,53 @@ const Navigation = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-3">
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(!isOpen)}
-              className="text-foreground hover:text-primary transition-colors"
+              className="text-foreground hover:text-primary transition-colors relative z-[110] min-w-[44px] min-h-[44px]"
+              aria-label="Toggle menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </Button>
           </div>
         </div>
 
-        {/* Mobile Navigation Menu */}
-        <div className={`md:hidden transition-all duration-300 ease-in-out ${
+        {/* Mobile Navigation Menu - Full Screen Overlay */}
+        <div className={`md:hidden fixed inset-0 top-20 z-[105] transition-all duration-300 ease-in-out ${
           isOpen 
-            ? "max-h-96 opacity-100" 
-            : "max-h-0 opacity-0 overflow-hidden"
+            ? "opacity-100 translate-y-0" 
+            : "opacity-0 -translate-y-full pointer-events-none"
         }`}>
-          <div className="py-4 space-y-2 bg-background/95 backdrop-blur-md rounded-lg mt-2 shadow-lg">
-            {navItems.map((item) => (
-              <button
-                key={item.sectionId}
-                onClick={() => smoothScrollTo(item.sectionId)}
-                className={`block w-full text-left px-4 py-3 text-sm font-medium transition-all duration-200 hover:bg-muted hover:text-primary ${
-                  activeSection === item.sectionId 
-                    ? "text-primary bg-muted/50 border-l-4 border-primary" 
-                    : "text-foreground/80"
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
+          <div className="bg-background/98 backdrop-blur-md h-full shadow-2xl border-t border-border/10">
+            <div className="container mx-auto px-6 py-8">
+              <div className="space-y-1">
+                {navItems.map((item) => (
+                  <button
+                    key={item.sectionId}
+                    onClick={() => smoothScrollTo(item.sectionId)}
+                    className={`block w-full text-left px-6 py-4 text-lg font-medium transition-all duration-200 rounded-lg ${
+                      activeSection === item.sectionId 
+                        ? "text-primary bg-primary/10 border-l-4 border-primary shadow-sm" 
+                        : "text-foreground/80 hover:bg-muted/50 hover:text-primary"
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
+
+        {/* Mobile Menu Backdrop */}
+        {isOpen && (
+          <div 
+            className="md:hidden fixed inset-0 top-20 bg-black/20 z-[104]"
+            onClick={() => setIsOpen(false)}
+          />
+        )}
       </div>
     </nav>
   );
