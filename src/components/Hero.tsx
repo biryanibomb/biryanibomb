@@ -4,7 +4,7 @@ import floatingSpices from "@/assets/floating-spices.png";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-tandoori-red to-kesar-gold"></div>
       
