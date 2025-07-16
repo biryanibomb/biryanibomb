@@ -10,50 +10,7 @@ const Reviews = () => {
   const [rating, setRating] = useState(0);
   const [hoveredRating, setHoveredRating] = useState(0);
 
-  const sampleReviews = [
-    {
-      name: "Nikita",
-      location: "Pune",
-      rating: 5,
-      comment: "3 cubes, 3 guests, 0 stress. This is a game changer for my dinner parties!",
-      avatar: "N"
-    },
-    {
-      name: "Karan",
-      location: "Delhi", 
-      rating: 5,
-      comment: "Best shortcut to real biryani! The Hyderabadi flavor is exactly like my grandmother's recipe.",
-      avatar: "K"
-    },
-    {
-      name: "Priya",
-      location: "Bangalore",
-      rating: 4,
-      comment: "Love the Lucknowi variant! Perfect for my weekend meals. Will definitely order again.",
-      avatar: "P"
-    },
-    {
-      name: "Arjun",
-      location: "Mumbai",
-      rating: 5,
-      comment: "Hostel life just got better! No more expensive food delivery. Thank you Biryani Bombs!",
-      avatar: "A"
-    },
-    {
-      name: "Sneha",
-      location: "Chennai",
-      rating: 5,
-      comment: "The Kolkata flavor is amazing! Sweet and aromatic, just how I like it.",
-      avatar: "S"
-    },
-    {
-      name: "Rahul",
-      location: "Hyderabad",
-      rating: 4,
-      comment: "Great product! Saves so much time on busy weekdays. The spice level is perfect.",
-      avatar: "R"
-    }
-  ];
+  const sampleReviews: any[] = [];
 
   const handleSubmitReview = (e: React.FormEvent) => {
     e.preventDefault();
@@ -134,33 +91,39 @@ const Reviews = () => {
             </h3>
             
             <div className="space-y-4 max-h-96 overflow-y-auto pr-2">
-              {sampleReviews.map((review, index) => (
-                <Card key={index} className="border-clay-brown/10 hover:shadow-medium transition-all duration-300">
-                  <CardContent className="p-4">
-                    <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
-                        {review.avatar}
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="font-semibold text-clay-brown">
-                            {review.name}
-                          </span>
-                          <span className="text-clay-brown/60 text-sm">
-                            {review.location}
-                          </span>
+              {sampleReviews.length === 0 ? (
+                <div className="text-center py-8 text-clay-brown/60">
+                  <p>No reviews yet. Be the first to share your experience!</p>
+                </div>
+              ) : (
+                sampleReviews.map((review, index) => (
+                  <Card key={index} className="border-clay-brown/10 hover:shadow-medium transition-all duration-300">
+                    <CardContent className="p-4">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
+                          {review.avatar}
                         </div>
-                        <div className="flex gap-1 mb-2">
-                          {renderStars(review.rating)}
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="font-semibold text-clay-brown">
+                              {review.name}
+                            </span>
+                            <span className="text-clay-brown/60 text-sm">
+                              {review.location}
+                            </span>
+                          </div>
+                          <div className="flex gap-1 mb-2">
+                            {renderStars(review.rating)}
+                          </div>
+                          <p className="text-clay-brown/80 text-sm leading-relaxed">
+                            "{review.comment}"
+                          </p>
                         </div>
-                        <p className="text-clay-brown/80 text-sm leading-relaxed">
-                          "{review.comment}"
-                        </p>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                    </CardContent>
+                  </Card>
+                ))
+              )}
             </div>
           </div>
         </div>
